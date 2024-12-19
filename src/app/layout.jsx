@@ -1,4 +1,5 @@
 import '@/styles/globals.css';
+import vazirFont from '@/constants/localFont';
 
 export const metadata = {
   title: 'Welcome to capi-admin',
@@ -6,7 +7,12 @@ export const metadata = {
 };
 export default function RootLayout({ children }) {
   return (
-    <html lang="fa" dir="rtl" suppressHydrationWarning>
+    <html
+      lang="fa"
+      dir="rtl"
+      suppressHydrationWarning
+      className={`${vazirFont.variable} font-sans`}
+    >
       <body>{children}</body>
     </html>
   );
