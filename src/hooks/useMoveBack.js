@@ -1,4 +1,5 @@
-const { useRouter } = require('next/navigation');
+import { useRouter } from "next/navigation";
+
 const useMoveBack = () => {
   const router = useRouter();
   function back() {
