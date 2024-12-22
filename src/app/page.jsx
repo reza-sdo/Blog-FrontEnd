@@ -1,8 +1,13 @@
+import Button from '@/ui/Button';
+import Link from 'next/link';
+
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      page
-      تست فارسی
+    <div className="bg-primary-100">
+      page تست فارسی
+      <Button variant="primary">
+        <Link href={'ggg'}>ssdsdsd</Link>
+      </Button>
     </div>
   );
 }
