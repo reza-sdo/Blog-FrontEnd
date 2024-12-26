@@ -1,4 +1,5 @@
 import ButtonIcon from '@/ui/ButtonIcon';
+import { toPersianDigits } from '@/utils/numberFormatter';
 import {
   BookmarkIcon,
   ChatBubbleOvalLeftEllipsisIcon,
@@ -10,7 +11,7 @@ const PostInteractions = ({ post }) => {
     <div className="flex items-center gap-x-4">
       <ButtonIcon variant="primary">
         <ChatBubbleOvalLeftEllipsisIcon />
-        <span>{post.commentsCount}</span>
+        <span>{toPersianDigits(post.commentsCount)}</span>
       </ButtonIcon>
       <ButtonIcon variant="primary">
         <HeartIcon />
