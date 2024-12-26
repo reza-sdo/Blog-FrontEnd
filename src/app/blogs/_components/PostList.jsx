@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import React from 'react';
+import CoverImage from './CoverImage';
 
 const PostList = async () => {
   // await new Promise((res) => setTimeout(() => res(), 5000));
@@ -9,15 +9,15 @@ const PostList = async () => {
   return data.posts.length > 0 ? (
     <div className="grid grid-cols-12 gap-8">
       {data.posts.map((post) => (
-        <div className="col-span-12 sm:col-span-6 lg:col-span-4 border border-secondary-300 p-2 rounded-lg">
-          <div className="relative aspect-video overflow-hidden rounded-md mb-6">
-            <Image
-              fill
-              src={post.coverImageUrl}
-              alt={post.title}
-              className="object-cover object-center hover:scale-110 transition-all duration-300 ease-in-out"
-            />
-          </div>
+        <div
+          key={post.id}
+          className="col-span-12 sm:col-span-6 lg:col-span-4 border border-secondary-300 p-2 rounded-lg"
+        >
+          <CoverImage
+            slug={post.slug}
+            postTitle={post.title}
+            postIMG={post.coverImageUrl}
+          />
         </div>
       ))}
     </div>
