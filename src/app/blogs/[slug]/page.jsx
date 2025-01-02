@@ -2,9 +2,14 @@ import { getPostBySlug } from '@/services/postService';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
+export function generateStaticParam() {
+  //1- get all posts
+  //2- create data and return it
+}
+
 export async function generateMetadata({ params }) {
   const param = await params;
-  const post = await getPostBySlug(param.postSlug);
+  const post = await getPostBySlug(param.slug);
 
   return {
     title: `پست - ${post.title}`,
@@ -14,7 +19,7 @@ export async function generateMetadata({ params }) {
 const SinglePost = async ({ params }) => {
   // await new Promise((res) => setTimeout(() => res(), 3000));
   const param = await params;
-  const post = await getPostBySlug(param.postSlug);
+  const post = await getPostBySlug(param.slug);
 
   if (!post) notFound();
   return (
