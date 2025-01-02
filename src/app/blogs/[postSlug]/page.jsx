@@ -1,14 +1,21 @@
+import { getPostBySlug } from '@/services/postService';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+
+export async function generateMetadata({ params }) {
+  const param = await params;
+  const post = await getPostBySlug(param.postSlug);
+
+  return {
+    title: `پست - ${post.title}`,
+  };
+}
 
 const SinglePost = async ({ params }) => {
   // await new Promise((res) => setTimeout(() => res(), 3000));
   const param = await params;
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/post/slug/${param.postSlug}`
-  );
-  const { data } = await res.json();
-  const { post } = data || {};
+  const post = await getPostBySlug(param.postSlug);
+
   if (!post) notFound();
   return (
     <div className="text-secondary-600 max-w-screen-md mx-auto">
