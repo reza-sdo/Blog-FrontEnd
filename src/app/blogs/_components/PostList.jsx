@@ -4,12 +4,13 @@ import Link from 'next/link';
 import { ClockIcon } from '@heroicons/react/24/outline';
 import Author from './Author';
 import PostInteractions from './PostInteractions';
+import { getPosts } from '@/services/postService';
 
 const PostList = async () => {
   // await new Promise((res) => setTimeout(() => res(), 5000));
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/post/list`);
-  const { data } = await res.json();
+  const data = await getPosts();
+
   return data.posts.length > 0 ? (
     <div className="grid grid-cols-12 gap-8">
       {data.posts.map((post) => (
