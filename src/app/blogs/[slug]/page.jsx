@@ -1,10 +1,13 @@
-import { getPostBySlug } from '@/services/postService';
+import { getPostBySlug, getPosts } from '@/services/postService';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
-export function generateStaticParam() {
+export async function generateStaticParams() {
   //1- get all posts
+  const data = await getPosts();
   //2- create data and return it
+  const slugs = data.posts.map((post) => ({ slug: post.slug }));
+  return slugs;
 }
 
 export async function generateMetadata({ params }) {
