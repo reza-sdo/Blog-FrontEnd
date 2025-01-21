@@ -1,21 +1,23 @@
 export default function RHFTextField({
-  type = "text",
+  type = 'text',
   label,
   name,
-  dir = "rtl",
+  dir = 'rtl',
   register,
   errors,
   validationSchema = {},
+  isRequired = false,
   ...rest
 }) {
   const errorMessages = errors?.[name];
   const hasError = !!(errors && errorMessages);
   return (
     <div
-      className={`textField relative ${hasError ? "textField--invalid" : ""}`}
+      className={`textField relative ${hasError ? 'textField--invalid' : ''}`}
     >
       <label htmlFor={name} className="mb-2 block text-secondary-700">
         {label}
+        {isRequired && <span className="text-error">*</span>}
       </label>
       <input
         autoComplete="off"
@@ -23,7 +25,7 @@ export default function RHFTextField({
         id={name}
         dir={dir}
         className={`textField__input  ${
-          dir === "ltr" ? "text-left" : "text-right"
+          dir === 'ltr' ? 'text-left' : 'text-right'
         }`}
         {...register(name, validationSchema)}
         {...rest}

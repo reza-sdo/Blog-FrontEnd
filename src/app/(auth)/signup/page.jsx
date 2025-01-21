@@ -3,12 +3,35 @@ import Button from '@/ui/Button';
 import RHFTextField from '@/ui/RHFTextField';
 import TextField from '@/ui/TextField';
 import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
-// export const metadata = {
-//   title: 'ثبت نام',
-// };
+const formSchema = yup
+  .object({
+    name: yup
+      .string()
+      .min(5, 'نام و نام خانوادگی نامعتبر است')
+      .required('نام و نام خانوادگی ضروری است'),
+    email: yup.string().email('ایمیل نامعتبر است ').required('ایمیل ضروری است'),
+    password: yup
+      .string()
+      .min(8, 'رمز عبور حداقل 8 رقم ضروری است')
+      .required('رمز عبور ضروری است'),
+  })
+  .required();
+
 const SignupPage = () => {
-  const { handleSubmit, register } = useForm();
+  //=========== Hooks ===========
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, isLoading },
+  } = useForm({
+    resolver: yupResolver(formSchema),
+    mode: 'onTouched',
+  });
+
+  //=========== Handler ===========
   const submitHandler = (data) => {
     console.log(data);
   };
@@ -22,6 +45,8 @@ const SignupPage = () => {
           register={register}
           label="نام و نام خانوادگی"
           name="name"
+          isRequired
+          errors={errors}
         />
         <RHFTextField
           register={register}
@@ -29,6 +54,8 @@ const SignupPage = () => {
           name="email"
           dir="ltr"
           type="email"
+          isRequired
+          errors={errors}
         />
         <RHFTextField
           register={register}
@@ -36,6 +63,8 @@ const SignupPage = () => {
           name="password"
           type="password"
           dir="ltr"
+          isRequired
+          errors={errors}
         />
         <Button variant="primary" type="submit" className="w-full">
           تایید
