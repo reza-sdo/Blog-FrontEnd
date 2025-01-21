@@ -13,9 +13,10 @@ const nextConfig = {
   logging: {
     fetches: { fullUrl: true },
   },
-  experimental: {
-    ppr: 'incremental',
-  },
 };
 
 export default nextConfig;
+
+// experimental: {
+//   ppr: 'incremental',
+// },
