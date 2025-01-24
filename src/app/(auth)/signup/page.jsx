@@ -5,6 +5,8 @@ import TextField from '@/ui/TextField';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { signupApi } from '@/services/authService';
+import toast from 'react-hot-toast';
 
 const formSchema = yup
   .object({
@@ -32,8 +34,20 @@ const SignupPage = () => {
   });
 
   //=========== Handler ===========
-  const submitHandler = (data) => {
-    console.log(data);
+  const submitHandler = async (data) => {
+    try {
+      console.log(data);
+      const { user, message } = await signupApi({
+        email: data.email,
+        name: data.name,
+        password: data.password,
+      });
+      console.log(user, message);
+      toast.success(message);
+    } catch (error) {
+      console.log(error);
+      toast.error(error?.response?.data?.message);
+    }
   };
   return (
     <div>
