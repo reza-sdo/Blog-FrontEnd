@@ -7,6 +7,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signupApi } from '@/services/authService';
 import toast from 'react-hot-toast';
+import { useAuth } from '@/context/AuthContext';
 
 const formSchema = yup
   .object({
@@ -33,21 +34,11 @@ const SignupPage = () => {
     mode: 'onTouched',
   });
 
+  const { signup } = useAuth();
+
   //=========== Handler ===========
   const submitHandler = async (data) => {
-    try {
-      console.log(data);
-      const { user, message } = await signupApi({
-        email: data.email,
-        name: data.name,
-        password: data.password,
-      });
-      console.log(user, message);
-      toast.success(message);
-    } catch (error) {
-      console.log(error);
-      toast.error(error?.response?.data?.message);
-    }
+    await signup(data);
   };
   return (
     <div>
