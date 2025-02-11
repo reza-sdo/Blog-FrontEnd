@@ -1,12 +1,9 @@
 'use client';
 import Button from '@/ui/Button';
 import RHFTextField from '@/ui/RHFTextField';
-import TextField from '@/ui/TextField';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { signupApi } from '@/services/authService';
-import toast from 'react-hot-toast';
 import { useAuth } from '@/context/AuthContext';
 
 const formSchema = yup
