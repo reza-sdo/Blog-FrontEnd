@@ -2,6 +2,7 @@
 import { useAuth } from '@/context/AuthContext';
 import Button from '@/ui/Button';
 import RHFTextField from '@/ui/RHFTextField';
+import { SpinnerMini } from '@/ui/Spinner';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
 import React from 'react';
@@ -24,7 +25,7 @@ const SigninPage = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isLoading },
+    formState: { errors , isLoading },
   } = useForm({ resolver: yupResolver(formSchema), mode: 'onTouched' });
 
   const { signin } = useAuth();
@@ -56,8 +57,13 @@ const SigninPage = () => {
           type="password"
           errors={errors}
         />
-        <Button variant="primary" type="submit" className="w-full">
-          تایید
+        <Button
+          disabled={isLoading}
+          variant="primary"
+          type="submit"
+          className="w-full flex justify-center"
+        >
+          {isLoading ? <SpinnerMini /> : 'تایید'}
         </Button>
       </form>
       <Link className="text-secondary-500 mt-6 text-center" href="/signup">
