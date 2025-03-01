@@ -5,6 +5,8 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuth } from '@/context/AuthContext';
+import Link from 'next/link';
+import { SpinnerMini } from '@/ui/Spinner';
 
 const formSchema = yup
   .object({
@@ -68,10 +70,19 @@ const SignupPage = () => {
           isRequired
           errors={errors}
         />
-        <Button variant="primary" type="submit" className="w-full">
-          تایید
+        <Button
+          disabled={isLoading}
+          variant="primary"
+          type="submit"
+          className="w-full flex justify-center"
+        >
+          {isLoading ? <SpinnerMini /> : 'تایید'}
         </Button>
       </form>
+
+      <Link className="text-secondary-500 mt-6 text-center" href="/signin">
+        حساب کاربری دارید؟
+      </Link>
     </div>
   );
 };

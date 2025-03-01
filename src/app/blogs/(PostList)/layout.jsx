@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import Spinner from '@/ui/Spinner';
+import { Spinner } from '@/ui/Spinner';
 import CategoryList from '../_components/CategoryList';
 
 function BlogLayout({ children }) {

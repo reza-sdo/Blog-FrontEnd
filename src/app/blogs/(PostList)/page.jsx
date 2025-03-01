@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import Spinner from '@/ui/Spinner';
+import {Spinner} from '@/ui/Spinner';
 import PostList from '../_components/PostList';
 // this is for next 14 , in next 15 data is no cached
 // export const revalidate = 0
