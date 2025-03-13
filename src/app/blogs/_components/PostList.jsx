@@ -5,11 +5,14 @@ import { ClockIcon } from '@heroicons/react/24/outline';
 import Author from './Author';
 import PostInteractions from './PostInteractions';
 import { getPosts } from '@/services/postService';
+import { cookies } from 'next/headers';
+import setCookiesOnRequest from '@/utils/setCookiesOnRequest';
 
 const PostList = async () => {
   // await new Promise((res) => setTimeout(() => res(), 5000));
-
-  const data = await getPosts();
+  const cookieStore = await cookies();
+  const options = await setCookiesOnRequest(cookieStore);
+  const data = await getPosts(options);
 
   return data.posts.length > 0 ? (
     <div className="grid grid-cols-12 gap-8">
