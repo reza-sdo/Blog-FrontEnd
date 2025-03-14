@@ -8,15 +8,15 @@ import { getPosts } from '@/services/postService';
 import { cookies } from 'next/headers';
 import setCookiesOnRequest from '@/utils/setCookiesOnRequest';
 
-const PostList = async () => {
+const PostList = async ({posts}) => {
   // await new Promise((res) => setTimeout(() => res(), 5000));
-  const cookieStore = await cookies();
-  const options = await setCookiesOnRequest(cookieStore);
-  const data = await getPosts(options);
+  // const cookieStore = await cookies();
+  // const options = await setCookiesOnRequest(cookieStore);
+  // const data = await getPosts(options);
 
-  return data.posts.length > 0 ? (
+  return posts.posts.length > 0 ? (
     <div className="grid grid-cols-12 gap-8">
-      {data.posts.map((post) => (
+      {posts.posts.map((post) => (
         <div
           key={post.id}
           className="col-span-12 sm:col-span-6 lg:col-span-4 border border-secondary-300 p-2 rounded-lg"
