@@ -9,10 +9,10 @@ export async function getPostBySlug(slug) {
   return post;
 }
 
-export async function getPosts(options = {}) {
+export async function getPosts(searchParam, options = {}) {
   // next: { revalidate: 60 },
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/post/list`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/post/list?${searchParam}`,
     options
   );
   const { data } = (await res.json()) || {};

@@ -3,7 +3,6 @@ import React from 'react';
 
 async function CategoryPage({ params }) {
   const { categorySlug } = await params;
-  // get slug
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/post/list?categorySlug=${categorySlug}`
   );

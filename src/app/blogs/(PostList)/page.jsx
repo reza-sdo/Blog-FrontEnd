@@ -4,6 +4,7 @@ import PostList from '../_components/PostList';
 import { cookies } from 'next/headers';
 import setCookiesOnRequest from '@/utils/setCookiesOnRequest';
 import { getPosts } from '@/services/postService';
+import queryString from 'query-string';
 // this is for next 14 , in next 15 data is no cached
 // export const revalidate = 0
 // because data is cached by default and we see out of date data
@@ -12,10 +13,12 @@ import { getPosts } from '@/services/postService';
 
 // export const experimental_ppr = true;
 
-async function page() {
+async function page({ searchParams }) {
+  const stringifiedQueryParams = queryString.stringify(await searchParams);
+
   const cookieStore = await cookies();
   const options = await setCookiesOnRequest(cookieStore);
-  const data = await getPosts(options);
+  const data = await getPosts(stringifiedQueryParams, options);
   return (
     <div>
       <PostList posts={data} />
